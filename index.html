@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BEGGED — партнёрская платформа для рекрутеров</title>
+<meta name="description" content="Приводи кандидатов в проверенные компании и получай до 60 000 ₽ с одного направления. Без вложений, удалённо, поддержка 24/7.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07061a;
+  --bg2:#0e0c26;
+  --card:rgba(255,255,255,.04);
+  --line:rgba(255,255,255,.09);
+  --text:#f3f2ff;
+  --muted:#9d9bbd;
+  --violet:#8b5cf6;
+  --indigo:#6366f1;
+  --sky:#38bdf8;
+  --grad:linear-gradient(90deg,#a855f7 0%,#6366f1 50%,#38bdf8 100%);
+  --display:'Unbounded','Arial Black',system-ui,sans-serif;
+  --body:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --tg:https://t.me/username;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);color:var(--text);background:var(--bg);
+  line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%}
+:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+
+/* background glow */
+.glow{position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+   radial-gradient(600px 420px at 85% 10%,rgba(139,92,246,.28),transparent 70%),
+   radial-gradient(520px 380px at 95% 70%,rgba(56,189,248,.16),transparent 70%),
+   radial-gradient(500px 400px at 0% 40%,rgba(99,102,241,.12),transparent 70%);}
+
+/* header */
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(7,6,26,.7);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:14px}
+.logo b{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:.02em}
+.logo b span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo small{font-size:11px;line-height:1.25;color:var(--muted);border-left:1px solid var(--line);padding-left:14px}
+.menu{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+.menu a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;
+  font:700 15px/1 var(--body);border-radius:999px;padding:18px 30px;transition:transform .2s,box-shadow .2s}
+.btn-main{background:var(--grad);color:#fff;box-shadow:0 10px 40px -10px rgba(99,102,241,.8)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 14px 50px -10px rgba(99,102,241,1)}
+.btn-ghost{background:var(--card);border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25)}
+.btn-sm{padding:12px 20px;font-size:14px}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* hero */
+.hero{padding:70px 0 90px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);font-size:14px;font-weight:600}
+.pill i{width:10px;height:10px;border-radius:50%;background:var(--grad);box-shadow:0 0 12px var(--indigo)}
+.pill span{color:var(--muted);font-weight:500;border-left:1px solid var(--line);padding-left:12px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(36px,5.6vw,72px);line-height:1.04;
+  letter-spacing:-.02em;margin:28px 0 22px}
+h1 .g{display:block;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:520px}
+.money{margin:30px 0 32px;display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px}
+.money .pre{font-family:var(--display);font-size:22px;font-weight:600}
+.money .sum{font-family:var(--display);font-weight:800;font-size:clamp(44px,6vw,76px);line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.money .post{width:100%;color:var(--muted);font-size:16px}
+.perks{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:34px}
+.perk{display:flex;align-items:center;gap:12px;padding:12px 18px 12px 12px;border-radius:16px;
+  border:1px solid var(--line);background:var(--card)}
+.perk .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--grad);flex:none}
+.perk .ic svg{width:18px;height:18px}
+.perk b{display:block;font-size:14px}
+.perk small{color:var(--muted);font-size:12px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.note{margin-top:18px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+
+.arrow-box{position:relative;aspect-ratio:1;display:grid;place-items:center}
+.arrow-box::before{content:"";position:absolute;inset:12%;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,92,246,.55),rgba(56,189,248,.15) 55%,transparent 72%);filter:blur(30px)}
+.arrow{width:78%;position:relative;filter:drop-shadow(0 30px 60px rgba(99,102,241,.6));
+  animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-14px) rotate(-2deg)}}
+.ring{position:absolute;inset:4%;border:1px solid rgba(255,255,255,.06);border-radius:50%}
+.ring.r2{inset:18%}
+
+/* sections */
+section{padding:90px 0}
+.h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,3.8vw,46px);line-height:1.1;
+  letter-spacing:-.015em;max-width:760px;margin-bottom:18px}
+.sub{color:var(--muted);font-size:17px;max-width:600px;margin-bottom:48px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.step{padding:32px 26px 10px 0;position:relative}
+.step:not(:last-child){border-right:1px solid var(--line);margin-right:26px}
+.step .n{font-family:var(--display);font-size:44px;font-weight:800;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:18px}
+.step h3{font-size:19px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px}
+
+/* directions */
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dir{padding:28px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+  border:1px solid var(--line);display:flex;flex-direction:column;gap:14px;min-height:220px}
+.dir.big{grid-column:span 2;background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(56,189,248,.08) 60%,rgba(255,255,255,.02));
+  border-color:rgba(139,92,246,.35)}
+.dir h3{font-size:20px}
+.dir p{color:var(--muted);font-size:15px;flex:1}
+.dir .pay{font-family:var(--display);font-weight:600;font-size:22px}
+.dir .pay small{font-family:var(--body);font-size:13px;color:var(--muted);font-weight:500;display:block;margin-top:2px}
+.tag{align-self:flex-start;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;
+  background:rgba(255,255,255,.07);color:#cfcdf0}
+
+/* who */
+.who{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.list{list-style:none;display:grid;gap:4px}
+.list li{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);font-size:17px}
+.list li svg{width:24px;height:24px;flex:none;margin-top:1px}
+.list li span{color:var(--muted);display:block;font-size:15px;margin-top:2px}
+
+/* calc */
+.calc{border-radius:28px;padding:40px;border:1px solid rgba(139,92,246,.35);
+  background:linear-gradient(160deg,rgba(139,92,246,.16),rgba(14,12,38,.6) 60%)}
+.calc label{display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px}
+.calc label output{font-family:var(--display);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--violet);height:6px;margin-bottom:30px;cursor:pointer}
+.calc .res{border-top:1px solid var(--line);padding-top:24px}
+.calc .res small{color:var(--muted);font-size:14px}
+.calc .res b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(34px,4vw,48px);line-height:1.15;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.calc .hint{color:var(--muted);font-size:13px;margin-top:10px}
+
+/* faq */
+.faq{max-width:820px}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:24px 40px 24px 0;font-size:18px;font-weight:600;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;
+  border-right:2px solid var(--sky);border-bottom:2px solid var(--sky);transform:translateY(-70%) rotate(45deg);transition:transform .25s}
+details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
+details p{color:var(--muted);padding:0 0 24px;max-width:700px}
+
+/* final */
+.final{text-align:center;border-radius:36px;padding:80px 30px;position:relative;overflow:hidden;
+  background:radial-gradient(600px 300px at 50% 0%,rgba(139,92,246,.45),transparent 70%),var(--bg2);
+  border:1px solid var(--line)}
+.final .h2{margin-inline:auto}
+.final .sub{margin-inline:auto;margin-bottom:34px}
+.final .ctas{justify-content:center}
+
+footer{padding:40px 0 50px;color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;border-top:1px solid var(--line);padding-top:30px}
+
+/* mobile sticky CTA */
+.mcta{display:none}
+
+@media (max-width:960px){
+  .menu{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .arrow-box{order:-1;width:min(320px,70%);margin:0 auto -20px}
+  .steps{grid-template-columns:1fr 1fr;row-gap:10px}
+  .step:nth-child(2){border-right:0;margin-right:0}
+  .dirs{grid-template-columns:1fr 1fr}
+  .who{grid-template-columns:1fr;gap:40px}
+}
+@media (max-width:640px){
+  .hero{padding:30px 0 60px}
+  section{padding:64px 0}
+  .logo small{display:none}
+  .nav .btn{display:none}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0!important;margin-right:0!important;border-bottom:1px solid var(--line);padding:26px 0}
+  .dirs{grid-template-columns:1fr}
+  .dir.big{grid-column:auto}
+  .perk{flex:1 1 100%}
+  .ctas .btn{flex:1 1 100%}
+  .calc{padding:28px 22px}
+  .final{padding:56px 20px;border-radius:26px}
+  .mcta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30}
+  .mcta .btn{width:100%}
+  footer{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+
+<!-- ссылки контактов: замени здесь -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="tg" viewBox="0 0 24 24"><path fill="currentColor" d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.1 13 1.3 11.5c-1-.3-1.1-1 .2-1.5L20.5 2.7c.9-.3 1.7.2 1.4 1.6Z"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="url(#gc)"/><path d="m7.5 12.3 3 3 6-6.3" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="BEGGED — на главную">
+      <b>BE<span>GG</span>ED</b>
+      <small>Партнёрская<br>платформа</small>
+    </a>
+    <nav class="menu" aria-label="Разделы">
+      <a href="#how">Как это работает</a>
+      <a href="#dirs">Направления</a>
+      <a href="#calc">Доход</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn-main btn-sm js-tg" href="https://t.me/username" target="_blank" rel="noopener">
+      <svg><use href="#tg"/></svg>Написать в Telegram
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="pill"><i></i>Партнёрская программа <span>100+ направлений</span></div>
+        <h1>Зарабатывай <span class="g">на подборе людей</span></h1>
+        <p class="lead">Мы рекрутинговая компания. Ты приводишь кандидатов в проверенные сервисы — мы платим вознаграждение за каждого, кто вышел на работу.</p>
+        <div class="money">
+          <span class="pre">до</span><span class="sum">60 000 ₽</span>
+          <span class="post">с одного направления в месяц</span>
+        </div>
+        <div class="perks">
+          <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div><div><b>Без вложений</b><small>Старт бесплатный</small></div></div>
+          <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div><div><b>Удалённо</b><small>Из любого города</small></div></div>
+          <div class="perk"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.6 2.6 3 5.2"/></svg></div><div><b>Поддержка 24/7</b><small>Куратор на каждом этапе</small></div></div>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-main js-tg" href="https://t.me/username" target="_blank" rel="noopener"><svg><use href="#tg"/></svg>Перейти в Telegram</a>
+          <a class="btn btn-ghost js-max" href="https://max.ru/username" target="_blank" rel="noopener">Написать в MAX</a>
+        </div>
+        <p class="note"><svg width="16" height="16" style="color:var(--muted)"><use href="#tg"/></svg>Подключение занимает 10 минут</p>
+      </div>
+
+      <div class="arrow-box" aria-hidden="true">
+        <div class="ring"></div><div class="ring r2"></div>
+        <svg class="arrow" viewBox="0 0 400 400">
+          <defs>
+            <linearGradient id="a1" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#6d28d9"/><stop offset=".5" stop-color="#8b5cf6"/><stop offset="1" stop-color="#7dd3fc"/>
+            </linearGradient>
+            <linearGradient id="a2" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#3b0f8a"/><stop offset="1" stop-color="#2563eb"/>
+            </linearGradient>
+            <linearGradient id="a3" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- side / depth -->
+          <path d="M92 318 L226 132 L182 120 L330 62 L300 222 L276 186 L144 340 Z" fill="url(#a2)" transform="translate(16 18)"/>
+          <!-- face -->
+          <path d="M92 318 L226 132 L182 120 L330 62 L300 222 L276 186 L144 340 Z" fill="url(#a1)"/>
+          <!-- highlight -->
+          <path d="M182 120 L330 62 L318 82 L210 126 Z" fill="url(#a3)" opacity=".7"/>
+          <path d="M92 318 L226 132 L236 140 L104 326 Z" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="wrap">
+      <h2 class="h2">Четыре шага до первой выплаты</h2>
+      <p class="sub">Тебе не нужен опыт в HR. Мы даём вакансии, тексты объявлений и обучение — ты находишь людей.</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Пишешь нам</h3><p>В Telegram или MAX. Куратор отвечает и подключает к платформе.</p></div>
+        <div class="step"><div class="n">2</div><h3>Выбираешь направления</h3><p>Курьеры, агенты, продажи — берёшь одно или сразу несколько.</p></div>
+        <div class="step"><div class="n">3</div><h3>Приводишь кандидатов</h3><p>Размещаешь объявления по готовым шаблонам и передаёшь отклики по своей ссылке.</p></div>
+        <div class="step"><div class="n">4</div><h3>Получаешь выплату</h3><p>Кандидат вышел на работу — деньги приходят тебе на карту или счёт.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECTIONS -->
+  <section id="dirs">
+    <div class="wrap">
+      <h2 class="h2">Направления, с которыми мы работаем</h2>
+      <p class="sub">Только проверенные компании с постоянной потребностью в людях. Выплаты фиксированы заранее.</p>
+      <div class="dirs">
+        <article class="dir big">
+          <span class="tag">Самое популярное</span>
+          <h3>Курьеры в сервисы доставки</h3>
+          <p>Пешие, вело- и автокурьеры в крупные сервисы доставки еды и продуктов. Большой поток кандидатов в любом городе.</p>
+          <div class="pay">до 15 000 ₽<small>за одного курьера</small></div>
+        </article>
+        <article class="dir">
+          <span class="tag">Высокий чек</span>
+          <h3>Страховые агенты</h3>
+          <p>Подбор агентов в страховые компании, удалённый формат работы.</p>
+          <div class="pay">до 10 000 ₽<small>за агента</small></div>
+        </article>
+        <article class="dir">
+          <h3>Водители и такси</h3>
+          <p>Водители с личным авто и без — в таксопарки и грузоперевозки.</p>
+          <div class="pay">до 12 000 ₽<small>за водителя</small></div>
+        </article>
+        <article class="dir">
+          <h3>Продажи и колл-центры</h3>
+          <p>Операторы, менеджеры по продажам, удалённые консультанты.</p>
+          <div class="pay">до 8 000 ₽<small>за сотрудника</small></div>
+        </article>
+        <article class="dir">
+          <h3>Склады и логистика</h3>
+          <p>Комплектовщики, сборщики заказов, грузчики на склады маркетплейсов.</p>
+          <div class="pay">до 7 000 ₽<small>за сотрудника</small></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO + CALC -->
+  <section id="calc">
+    <div class="wrap who">
+      <div>
+        <h2 class="h2">Кому подойдёт</h2>
+        <ul class="list">
+          <li><svg><use href="#check"/></svg><div>Рекрутерам и HR-специалистам<span>Дополнительный доход на текущей базе кандидатов</span></div></li>
+          <li><svg><use href="#check"/></svg><div>Владельцам каналов и пабликов<span>Монетизация аудитории через вакансии</span></div></li>
+          <li><svg><use href="#check"/></svg><div>Арбитражникам и таргетологам<span>Свой трафик, фиксированная ставка за результат</span></div></li>
+          <li><svg><use href="#check"/></svg><div>Новичкам без опыта<span>Обучим с нуля и дадим готовые шаблоны</span></div></li>
+        </ul>
+      </div>
+
+      <div class="calc" aria-labelledby="calc-title">
+        <h3 id="calc-title" class="h2" style="font-size:26px;margin-bottom:28px">Посчитай свой доход</h3>
+        <label for="people">Кандидатов в месяц <output id="pOut">10</output></label>
+        <input type="range" id="people" min="1" max="50" value="10">
+        <label for="rate">Средняя выплата <output id="rOut">6 000 ₽</output></label>
+        <input type="range" id="rate" min="3000" max="15000" step="500" value="6000">
+        <div class="res">
+          <small>Твой доход в месяц</small>
+          <b id="total">60 000 ₽</b>
+          <p class="hint">Расчёт примерный: итог зависит от направления и города.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="h2">Частые вопросы</h2>
+      <div class="faq">
+        <details><summary>Нужно ли что-то платить за подключение?</summary><p>Нет. Подключение, обучение и материалы бесплатные. Мы зарабатываем вместе с тобой — на результате.</p></details>
+        <details><summary>Когда и как приходят выплаты?</summary><p>После того как кандидат выходит на работу и отрабатывает минимальный срок по направлению. Выплаты — на карту или на счёт самозанятого / ИП.</p></details>
+        <details><summary>У меня нет опыта в подборе. Получится?</summary><p>Да. Куратор покажет, где искать кандидатов, даст готовые тексты объявлений и скрипты общения.</p></details>
+        <details><summary>Можно работать с несколькими направлениями сразу?</summary><p>Да, и так выходит больше. Большинство партнёров ведут 2–3 направления одновременно.</p></details>
+        <details><summary>В каких городах можно работать?</summary><p>По всей России. Для большинства направлений есть вакансии в каждом крупном городе.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section>
+    <div class="wrap">
+      <div class="final">
+        <h2 class="h2">Начни зарабатывать на подборе уже сегодня</h2>
+        <p class="sub">Напиши куратору — подключим к платформе и выдадим первые вакансии.</p>
+        <div class="ctas">
+          <a class="btn btn-main js-tg" href="https://t.me/username" target="_blank" rel="noopener"><svg><use href="#tg"/></svg>Перейти в Telegram</a>
+          <a class="btn btn-ghost js-max" href="https://max.ru/username" target="_blank" rel="noopener">Написать в MAX</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="y">2026</span> BEGGED — партнёрская платформа</span>
+    <span>ИП Стародубов К. В. · ИНН 422194104701</span>
+  </div>
+</footer>
+
+<div class="mcta">
+  <a class="btn btn-main js-tg" href="https://t.me/username" target="_blank" rel="noopener"><svg><use href="#tg"/></svg>Перейти в Telegram</a>
+</div>
+
+<script>
+/* === НАСТРОЙКИ: впиши свои ссылки === */
+const TG_LINK  = "https://t.me/username";
+const MAX_LINK = "https://max.ru/username";
+
+document.querySelectorAll('.js-tg').forEach(a=>a.href=TG_LINK);
+document.querySelectorAll('.js-max').forEach(a=>a.href=MAX_LINK);
+document.getElementById('y').textContent=new Date().getFullYear();
+
+const p=document.getElementById('people'),r=document.getElementById('rate');
+const fmt=n=>n.toLocaleString('ru-RU').replace(/,/g,' ')+' ₽';
+function calc(){
+  document.getElementById('pOut').textContent=p.value;
+  document.getElementById('rOut').textContent=fmt(+r.value);
+  document.getElementById('total').textContent=fmt(p.value*r.value);
+}
+p.addEventListener('input',calc);r.addEventListener('input',calc);calc();
+</script>
+</body>
+</html>
